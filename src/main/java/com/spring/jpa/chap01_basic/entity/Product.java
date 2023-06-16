@@ -20,8 +20,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prod_id")
     private long id;
+
     @Column(name="prod_name" , nullable = false, length=30)
     private String name;
+
     private int price;
 
     @Enumerated(EnumType.STRING)
