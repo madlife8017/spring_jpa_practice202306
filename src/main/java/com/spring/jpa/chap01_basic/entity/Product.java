@@ -7,7 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Setter@Getter
+@Setter @Getter
 @ToString @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +18,10 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="prod_id")
+    @Column(name = "prod_id")
     private long id;
 
-    @Column(name="prod_name" , nullable = false, length=30)
+    @Column(name = "prod_nm", nullable = false, length = 30)
     private String name;
 
     private int price;
@@ -31,12 +31,26 @@ public class Product {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createDate;
+    private LocalDateTime createdDate;
 
     @UpdateTimestamp
-    private LocalDateTime updateDate;
+    private LocalDateTime updatedDate;
 
-    public enum Category{
-        FOOD, FASHION, ELECTORNIC
+    public enum Category {
+        FOOD, FASHION, ELECTRONIC
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,14 +8,16 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface StudentRepository  extends JpaRepository<Student, String> {
-    
+public interface StudentRepository
+    extends JpaRepository<Student, String> {
+
     List<Student> findByName(String name);
     List<Student> findByCityAndMajor(String city, String major);
 
     List<Student> findByMajorContaining(String major);
 
-    @Query(value = "SELECT * FROM tbl_student WHERE stu_name= :nm", nativeQuery = true)
+    //네이티브 쿼리 사용
+    @Query(value = "SELECT * FROM tbl_student WHERE stu_name = :nm", nativeQuery = true)
     Student findNameWithSQL(@Param("nm") String name);
 
     //JPQL
@@ -28,16 +30,32 @@ public interface StudentRepository  extends JpaRepository<Student, String> {
     // jpql: SELECT st FROM Student AS st
     //       WHERE st.name = ?
 
-    @Query("SELECT s FROM Student s WHERE s.city= ?1") //AND s.city=?2
+    //도시 이름으로 학생 조회
+    @Query("SELECT s FROM Student s WHERE s.city = ?1")
     List<Student> getByCityWithJPQL(String city);
 
     @Query("SELECT st FROM Student st WHERE st.name LIKE %:nm%")
     List<Student> searchByNamesWithJPQL(@Param("nm") String name);
 
     //JPQL로 수정 삭제 쿼리 쓰기
-
-    @Modifying //조회가 아닌경우 무조건 붙여야함
-    @Query("DELETE FROM Student s WHERE s.name=?1")
+    @Modifying //조회가 아닌 경우에는 무조건 붙여야 함.
+    @Query("DELETE FROM Student s WHERE s.name = ?1")
     void deleteByNameWithJPQL(String name);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
